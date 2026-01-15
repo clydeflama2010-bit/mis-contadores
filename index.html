@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contadores Regresivos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 flex items-center justify-center p-8">
+  <div class="flex flex-col md:flex-row gap-8">
+    
+    <!-- Contador 27 de Marzo -->
+    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20">
+      <h2 class="text-2xl font-bold text-white mb-6">27 de Marzo 2026</h2>
+      <div id="countdown1" class="flex gap-4">
+        <div class="bg-gradient-to-b from-rose-500 to-rose-600 rounded-xl p-4 min-w-[80px]">
+          <span id="days1" class="text-4xl font-bold text-white block">00</span>
+          <span class="text-rose-200 text-sm uppercase tracking-wider">Días</span>
+        </div>
+        <div class="bg-gradient-to-b from-rose-500 to-rose-600 rounded-xl p-4 min-w-[80px]">
+          <span id="hours1" class="text-4xl font-bold text-white block">00</span>
+          <span class="text-rose-200 text-sm uppercase tracking-wider">Horas</span>
+        </div>
+        <div class="bg-gradient-to-b from-rose-500 to-rose-600 rounded-xl p-4 min-w-[80px]">
+          <span id="minutes1" class="text-4xl font-bold text-white block">00</span>
+          <span class="text-rose-200 text-sm uppercase tracking-wider">Min</span>
+        </div>
+        <div class="bg-gradient-to-b from-rose-500 to-rose-600 rounded-xl p-4 min-w-[80px]">
+          <span id="seconds1" class="text-4xl font-bold text-white block">00</span>
+          <span class="text-rose-200 text-sm uppercase tracking-wider">Seg</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contador 19 de Junio -->
+    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20">
+      <h2 class="text-2xl font-bold text-white mb-6">19 de Junio 2026</h2>
+      <div id="countdown2" class="flex gap-4">
+        <div class="bg-gradient-to-b from-emerald-500 to-emerald-600 rounded-xl p-4 min-w-[80px]">
+          <span id="days2" class="text-4xl font-bold text-white block">00</span>
+          <span class="text-emerald-200 text-sm uppercase tracking-wider">Días</span>
+        </div>
+        <div class="bg-gradient-to-b from-emerald-500 to-emerald-600 rounded-xl p-4 min-w-[80px]">
+          <span id="hours2" class="text-4xl font-bold text-white block">00</span>
+          <span class="text-emerald-200 text-sm uppercase tracking-wider">Horas</span>
+        </div>
+        <div class="bg-gradient-to-b from-emerald-500 to-emerald-600 rounded-xl p-4 min-w-[80px]">
+          <span id="minutes2" class="text-4xl font-bold text-white block">00</span>
+          <span class="text-emerald-200 text-sm uppercase tracking-wider">Min</span>
+        </div>
+        <div class="bg-gradient-to-b from-emerald-500 to-emerald-600 rounded-xl p-4 min-w-[80px]">
+          <span id="seconds2" class="text-4xl font-bold text-white block">00</span>
+          <span class="text-emerald-200 text-sm uppercase tracking-wider">Seg</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function updateCountdown(targetDate, prefix) {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById(`days${prefix}`).textContent = '00';
+        document.getElementById(`hours${prefix}`).textContent = '00';
+        document.getElementById(`minutes${prefix}`).textContent = '00';
+        document.getElementById(`seconds${prefix}`).textContent = '00';
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById(`days${prefix}`).textContent = String(days).padStart(2, '0');
+      document.getElementById(`hours${prefix}`).textContent = String(hours).padStart(2, '0');
+      document.getElementById(`minutes${prefix}`).textContent = String(minutes).padStart(2, '0');
+      document.getElementById(`seconds${prefix}`).textContent = String(seconds).padStart(2, '0');
+    }
+
+    const target1 = new Date('March 27, 2026 00:00:00').getTime();
+    const target2 = new Date('June 19, 2026 00:00:00').getTime();
+
+    setInterval(() => {
+      updateCountdown(target1, '1');
+      updateCountdown(target2, '2');
+    }, 1000);
+
+    updateCountdown(target1, '1');
+    updateCountdown(target2, '2');
+  </script>
+</body>
+</html>
